@@ -1,0 +1,80 @@
+<h1 class="ui dividing header">Business Leads in <%= @city.name %>, <%= @city.province.abr %></h1>
+
+  <% if @city.machines.available.present? %>
+  <h1 class="ui header">Available LeadMachines</h1>
+  <p>We currently have  <%= pluralize(@city.machines.available.count, 'machine') %> ready to go in your city.</p>
+
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>ID</th> 
+        <th>Category</th>
+        <th>SubCategory</th>
+        <th>Specialty</th>
+        <th>City</th>
+        <th>Province</th>        
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @city.machines.available.each do |machine| %>
+        <tr>
+          <td><%= link_to machine.lmid, machine %></td>
+          <td><%= machine.category.name %></td>
+          <td><%= machine.subcategory.name if machine.subcategory.present? %></td>
+          <td><%= machine.specialty.name if machine.specialty.present? %></td>
+          <td><%= machine.city.name %></td>
+          <td><%= machine.province.abr %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <center>
+  <div class="ui positive message">
+    <h3>Not a match? No problem. Let us build one from scratch, CUSTOMIZED JUST FOR YOUR BUSINESS</h3>
+    <a href="/free-marketing-consultation" class="ui animated fade massive red button" tabindex="0">
+      <div class="visible content">LETS GET TO WORK</div>
+      <div class="hidden content">
+      MAKE MY PHONE RING</i>
+      </div>
+    </a>
+  </div>
+  </center>
+  <% else %>
+    <center>
+    <div class="ui positive message">
+      <h3>Sorry, no pre-built LeadMachines are available now. Let us build one from scratch, customized JUST FOR YOUR BUSINESS</h3>
+      <a href="/free-marketing-consultation" class="ui animated fade massive red button" tabindex="0">
+        <div class="visible content">LETS GET TO WORK</div>
+        <div class="hidden content">
+        MAKE MY PHONE RING</i>
+        </div>
+      </a>
+    </div>
+    </center>
+    <div class="ui divider"></div>
+    <div class="ui two column stackable grid">
+      <div class="column">
+      <h3>About <%= @city.name %></h3>
+      <p><%= @city.name %> has a population of <%= @city.population %>, which is an excellent market for your product or service.</p>
+      <p><%= markdown(@city.descr) if @city.descr %></p>
+      <% if @city.wikiurl.present? %>
+      <div class="ui negative message">
+        Access the full <%= @city.name %> Wikipedia Entry at <%= link_to @city.wikiurl, @city.wikiurl, target: '_blank' %>
+      </div>
+      <% end %>
+      <% if @city.govurl.present? %>
+        <div class="ui positive message">
+        Access the <%= @city.name %> government website at <%= link_to @city.govurl, @city.govurl, target: '_blank' %>
+        </div>
+        <% end %>
+      </div>
+      <div class="column">
+        <div class="ui embed">
+          <iframe src="<%= @city.mapurl %>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    </center>
+  <% end %>
+</div>

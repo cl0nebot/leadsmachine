@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><%= @title ||= "Leads Machine Makes your Phone Ring!" %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, async: Rails.env.production? %>
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <meta http-equiv="refresh" content="3;url=<%= root_path %>" />
+  <%= csrf_meta_tags %>
+</head>
+<body data-no-turbolink>
+	<div class="ui inverted red menu">
+	<% if current_user %>
+		<div class="logo item">
+			<a href="/dashboard"><i class="home icon" alt="Dashboard"></i></a>
+		</div>
+	  <div class="right item" data-no-turbolink>
+	   	<%= current_user.email %> (<%= current_user.role%>) &nbsp;
+	  	<%= link_to "log out", destroy_user_session_path, :method => :delete, class: 'ui inverted button' %>
+ <% else %>
+		<div class="logo item">
+			<a href="/"><i class="home icon" alt="home"></i></a>
+		</div>
+	  <div class="right item" data-no-turbolink>
+	  	<%= link_to "client login", new_user_session_path, class: 'ui inverted button' %>
+  <% end %>
+	  </div>
+	
+	</div>
+
+<% if (alert || notice) %>
+
+	<div class="ui page grid">
+		<% if alert %>
+	  <div class="ten wide centered column">
+	    <div class="ui negative compact icon message">
+	      <i class="close icon"></i>
+	      <i class="bomb icon"></i>
+	      <div class="header">
+	        <%= alert %>
+	      </div>
+	    </div>
+	  </div>
+		<% end %>
+		<% if notice %>
+	  <div class="ten wide centered column">
+	    <div class="ui positive icon message">
+	      <i class="close icon"></i>
+	      <i class="thumbs up icon"></i>
+	      <div class="header">
+	        <%= notice %>
+	      </div>
+	    </div>
+	  </div>
+		<% end %>
+	</div>
+
+<% end %>
+
+	<div class="ui container">
+		<p>&nbsp;</p>
+		<%= yield %>
+	</div>
+
+</body>
+</html>

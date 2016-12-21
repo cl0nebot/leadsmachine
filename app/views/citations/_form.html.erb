@@ -1,0 +1,15 @@
+<%= simple_form_for(@citation, html: {class: 'ui form'}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row"><%= f.association :citation_source, input_html: {class: 'ui dropdown'}, label_method: :site %></div>
+    <%= f.association :property, value: params[:property].to_i, input_html: {class: 'ui dropdown'} %>
+    <%= f.input :napmatch, label: "N-A-P Match" %>
+    <%= f.input :url %>
+    <%= f.input :pa, input_html: {value: 0}, label: "Page Authority" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'ui positive button' %>
+  </div>
+<% end %>

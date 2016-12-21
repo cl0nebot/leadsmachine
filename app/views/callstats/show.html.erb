@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Machine:</strong>
+  <%= @callstat.machine %>
+</p>
+
+<p>
+  <strong>Calls:</strong>
+  <%= @callstat.calls %>
+</p>
+
+<%= link_to 'Edit', edit_callstat_path(@callstat) %> |
+<%= link_to 'Back', callstats_path %>

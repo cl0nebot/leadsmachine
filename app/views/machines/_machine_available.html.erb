@@ -1,0 +1,26 @@
+<center>
+	<div class="ui  positive message">
+		THIS MACHINE IS AVAILABLE TO LEASE - HIT THAT BIG RED BUTTON
+	</div>
+	<%= render 'machinestats' %>
+	<p></p>
+	<a href='/contact-us' class="ui animated fade massive red button" tabindex="0">
+		<div class="visible content">I WANT THESE LEADS!</div>
+		<div class="hidden content">
+  		MAKE MY PHONE RING</i>
+		</div>
+	</a>
+</center>
+
+<div class="ui divider"></div>
+<h2>Machine Details</h2>
+<p>
+	<strong>Created:</strong>
+	  <%= @machine.created_at.strftime("%Y/%m/%d") %> - <%= @age %> days ago<br>
+</p>
+<p><%= @machine.category.name %> / <%= @machine.subcategory.name %> / <%= @machine.specialty.name %></p>
+
+City Size: <%= @citysize %><br>
+Retail Lead Value: $<%= @leadval %><br>
+Minimum Rate: $<%= @minrate %>
+

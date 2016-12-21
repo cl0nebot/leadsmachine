@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Citation source:</strong>
+  <%= @citation.citation_source %>
+</p>
+
+<p>
+  <strong>Property:</strong>
+  <%= @citation.property %>
+</p>
+
+<p>
+  <strong>Napmatch:</strong>
+  <%= @citation.napmatch %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @citation.url %>
+</p>
+
+<p>
+  <strong>Pa:</strong>
+  <%= @citation.pa %>
+</p>
+
+<%= link_to 'Edit', edit_citation_path(@citation) %> |
+<%= link_to 'Back', citations_path %>

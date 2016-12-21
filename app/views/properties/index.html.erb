@@ -1,0 +1,22 @@
+<h1>Properties for <%= @client.email %></h1>
+<td><%= link_to "Add Company", new_property_path, class: 'ui tiny teal button' %></td>
+<table class="ui selectable table">
+	<thead>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Phone</th>
+		<th>Website</th>
+		<th></th>
+	</thead>
+	<tbody>
+	<% @properties.each do |p| %>
+		<tr>
+			<td><%= p.id %></td>
+			<td><%= link_to p.name, property_path(p.id) %></td>
+			<td><%= p.phone %></td>
+			<td><%= p.url %></td>
+			<td class="collapsing"><%= link_to "Edit", edit_property_path(p.id), class: 'ui red basic button'%></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

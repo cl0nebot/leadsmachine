@@ -1,0 +1,88 @@
+<h1 class="ui header">Editing Property</h1>
+
+<div class="ui divider"></div>
+
+<%= form_for(@property, html: {class: 'ui form'}) do |f| %>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% @property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="two fields">
+    <div class="field">
+      <label>Name</label>
+      <%= f.text_field :name %>
+    </div>
+		<div class="field">
+      <label>Website URL</label>
+      <%= f.text_field :url %>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>Street 1</label>
+      <%= f.text_field :street1 %>
+    </div>
+   <div class="field">
+      <label>Street 2</label>
+      <%= f.text_field :street2 %>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>City</label>
+      <%= f.text_field :city %>
+    </div>
+    <div class="field">
+      <label>Province</label>
+      <%= f.text_field :province %>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>Postal Code</label>
+      <%= f.text_field :postalcode %>
+    </div>
+    <div class="field">
+      <label>Phone</label>
+      <%= f.text_field :phone %>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>G+ URL</label>
+      <%= f.text_field :googleplus %>
+    </div>
+    <div class="field">
+      <label>Facebook URL</label>
+      <%= f.text_field :facebook %>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>LinkedIn URL</label>
+      <%= f.text_field :linkedin %>
+    </div>
+    <div class="field">
+      <label>Twitter URL</label>
+      <%= f.text_field :twitter %>
+    </div>
+ 	</div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'ui positive button' %>
+  </div>
+<% end %>
+<div class="ui divider"></div>
+This came from the <%= @ref[:controller] %> controller<br>
+
+
+
+<%= link_to 'Show', @machine %> |
+<%= link_to 'Back', machines_path %>

@@ -1,0 +1,126 @@
+<div class="ui inverted vertical red masthead center aligned segment">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <div class="ui container" data-no-turbolink>
+    <h3>Canadian Service Companies and Contractors - Do You Want More Business?</h3>
+    <h1 class="ui inverted header">
+      We Make Your Phone Ring 
+    </h1>
+    <h2>More Calls = More Quotes = More Sales. It's Simple. It's Effective.</h2>
+    <p>&nbsp;</p>
+    <% if current_user %>
+    <%= link_to "Your Machines", machines_path, class: 'ui huge inverted white button' %>
+    <% else %>
+    <%= link_to "Get a Free Online Marketing Consultation", free_marketing_consultation_path, class: 'ui huge inverted white button'%>
+    <% end %>
+  </div>
+</div>
+
+<div class="ui vertical stripe segment">
+  <div class="ui middle aligned stackable grid container">
+    <div class="row">
+      <div class="eight wide column">
+        <h3 class="ui header">
+          Selling Used to be So Easy...
+        </h3>
+        <p>A few short years ago, you could just throw money at the Yellow Pages, and count on calls.  Want more calls? Buy a bigger ad.</p>
+        <p>But now? Internet - sure, but how? SEO? Adwords? Classifieds?  It's a mess.  </p>
+        
+        <h3 class="ui header">
+          You know you need to be Online, but How?
+          <div class="sub header">But are they finding you?</div>
+        </h3>
+        <p>Pretty much everyone's online now. And that's how they search for the product or service you offer. New Clients are the lifeblood of any growing company.  If the phone doesn't ring, your business is on the fast train to nowhere.  In the post-Yellow Pages world, your customers are increasingly searching online for the service you offer.  </p>
+So that's why we created LeadsMachine - the simplest way to make your phone ring steadily with calls from interested prospects.
+      </div>
+      <div class="eight wide right floated column">
+      <%= image_tag "plumber.png", alt: "another call from leadsmachine", class: "ui fluid bordered rounded image"  %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="center aligned column">
+        <a class="ui huge red  button" id="gomodalgo">How LeadsMachine Works</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui vertical stripe quote segment">
+  <div class="ui equal width stackable internally celled grid">
+    <div class="center aligned row">
+      <div class="column">
+        <h3>"These Guys are my Secret Weapon"</h3>
+        <p>I've added 2 additional installation teams - I'm busier than I've ever been</p>
+        <p>
+          <%= image_tag "nan.jpg", alt: "Joe P", class: "ui avatar image" %>
+          <b>Andy Fleming</b> Fleming Custom Kitchens
+        </p>
+      </div>
+      <div class="column">
+        <h3>"My third call turned into a $30,000 job."</h3>
+        <p>
+          <%= image_tag "nan.jpg", alt: "Joe P", class: "ui avatar image" %>
+          <b>Joe P.</b> Cover Me Roofing, Burlington
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui vertical stripe segment">
+	<div class="ui red inverted basic segment">
+		<div class="ui huge header"><center>There are Two Ways to Move Forward</center></div>
+	</div>
+  <div class="ui text container" data-no-turbolink>
+  	<div class="ui basic segment">
+    <h3 class="ui header">
+    
+    	1. Build Your Customized Leads Machine</h3>
+    
+    <p>Stop letting those leads go to your competition.  We'll analyize your market and build an exclusive multi-channel lead generation system customized to your business and the services you offer.  There are no shared leads here - the machine is built exclusively for you. You should plan for the call volume to ramp up over the first three months - every market is different. And of course, you'll get our 60 day 100% guarantee:  If you don't like our services for ANY reason, just let us know and we'll refund you without question.</p>
+    <center><%= link_to "Let's Talk - Free", free_marketing_consultation_path, class: 'ui large red button'%>
+    </center>
+    </div>
+    <h4 class="ui horizontal header divider">
+      Or
+    </h4>
+    <div class="ui basic segment">
+
+    <h3 class="ui header">
+    	2. Acquire an Established Leads Machine
+    
+    </h3>
+
+    <p>As time allows, we build Lead Machines on spec.  And occasionally, a client chooses to abandon a running Leads Machine (it's rare!). If you want leads immediately, this is the way to go. In as little as an hour, you can be receiving qualified prospects for your service or product in a local market to you.  You'll know in advance how many calls we process per month, and how long this particular leads machine has been "laying its golden eggs"</p>
+    <center>
+    	<%= link_to "See Available Inventory", machines_path, class: 'ui large red button' %>
+    </center>
+    </div>
+  </div>
+</div>
+
+<%= render 'footer' %>
+
+<div class="ui modal" id="gomodalgo">  
+  <div class="header">How LeadsMachine Works</div>
+    <div class="image content">
+    	<div class="ui image">
+        <%= image_tag "plumber.png" %>
+      </div>
+      <div class="description">
+      	<div class="ui header">1. Gather Targeted Leads. From Everywhere</div>
+      	<p>Your next customer could come from anywhere these days, so we cast a wide net, putting you front and center wherever possible.  Whether from Google, Kijiji or Craigslist, Facebook, or any other type of site or search, we employ best-of-breed strategies to get you in front of people who want your service NOW. </p>
+      	<div class="ui header">2. Give them Every Reason to Call</div>
+      	<p>We make you look good - not just good, but <em>the best</em> at what you do.  Our team of expert copywriters position your company as the obvious choice. We give the lead the choice to contact you via phone (preferred) or via email.</p>
+      	<div class="ui header">3. The Rest is Up to You</div>
+      	<p>Just like every other source of promotion, not every caller will buy from you. But if you usually close 1 out of every three leads, you should expect a similar result. If we double your call volume, could you handle all the business?</p>
+      	<div class="ui header">Tracking and Reporting is Standard, of course!</div>
+      	<p>We are committed to your success, and we want to prove the value of what we provide. Included with your LeadMachine is a new local phone number - we forward it to your main line or the number of your choice.  Each month, you receive a report showing the number of calls you received from your LeadMachine. </p>
+      </div>
+      <p></p>
+    </div>
+    <div class="actions">
+    	<div class="ui red approve button">Awesome!</div>
+    </div>
+  </div>
+</div>

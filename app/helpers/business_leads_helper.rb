@@ -1,0 +1,2 @@
+module BusinessLeadsHelper
+end

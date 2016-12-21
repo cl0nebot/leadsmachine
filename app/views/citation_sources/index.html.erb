@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Citation Sources</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Site</th>
+      <th>Submissionurl</th>
+      <th>Da</th>
+      <th>Freesubmit</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @citation_sources.each do |citation_source| %>
+      <tr>
+        <td><%= citation_source.site %></td>
+        <td><%= citation_source.submissionurl %></td>
+        <td><%= citation_source.da %></td>
+        <td><%= citation_source.freesubmit %></td>
+        <td><%= link_to 'Show', citation_source %></td>
+        <td><%= link_to 'Edit', edit_citation_source_path(citation_source) %></td>
+        <td><%= link_to 'Destroy', citation_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Citation source', new_citation_source_path %>

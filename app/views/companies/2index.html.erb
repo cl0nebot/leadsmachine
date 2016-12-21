@@ -1,0 +1,58 @@
+<% if current_user.client? %>
+<div class="ui message">invalid</div>
+<% else %>
+<div class="ui secondary menu">
+  <a class="item">Dashboard</a>
+  <a class="item" href="/machines">Machines</a>
+  <a class="item" href="/clients">Clients</a>
+  <a class="active item" href="/companies">Companies</a>
+</div>
+
+<% end %>
+
+ <h1 class="ui header">Companies
+    <% if params[:user_id] %>
+    <div class="sub header">User ID: <%= params[:user_id] %></div>
+    <% end %>
+  </h1>
+
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <% unless params[:user_id] %>
+      <th>User</th>
+      <% end %>
+      <th>Company</th>
+      <th>Street</th>
+      <th>City</th>
+      <th>Province</th>
+      
+      <th>Phone</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <% unless params[:user_id] %>
+        <td><%= company.user.email %></td>
+        <% end %>
+        <td><%= link_to company.cname, company_path(company) %></td>
+        <td><%= company.street1 %></td>
+        <td><%= company.city %></td>
+        <td><%= company.province %></td>
+      
+        <td><%= company.phone %></td>
+        <td><%= link_to 'Show', company %></td>
+        <td><%= link_to 'Edit', edit_company_path(company) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if can? :manage, @company %>
+<%= link_to 'New Company', new_company_path, class: 'ui positive button' %>
+<% end %>

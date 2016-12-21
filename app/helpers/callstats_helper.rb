@@ -1,0 +1,2 @@
+module CallstatsHelper
+end

@@ -1,0 +1,33 @@
+<h1>Business Leads in <%= @province.name %></h1>
+<div class="ui two column stackable grid">
+	<div class="column">
+		<% if @largecities.present? %>
+		Serving the following urban areas:
+		<ul class="ui list">
+			<% @largecities.each do |c| %>
+				<li><%= link_to c.name, city_path(c.slug) %> (<%= number_with_precision(c.population, precision: 0, delimiter: ',')%>)</li>
+			<% end %>
+		</ul>
+
+		<% end %>
+		<% if @smallcities.present? %>
+			
+			<% if @largecities.present? %>
+				Also serving these smaller communities:
+			<% else %>
+				We serve the following communities in <%= @province.name %>:
+			<% end %>
+
+				<ul class="ui list">
+					<% @smallcities.each do |c| %>
+						<li><%= c.name %> (<%= number_with_precision(c.population, precision: 0, delimiter: ',')%>)</li>
+					<% end %>
+				</ul>
+		<% end %>
+	</div>
+	<div class="column">
+    <div class="ui embed">
+      <iframe src="<%= @province.mapurl %>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<h1 class="ui header">LeadsMachine Dashboard</h1>
+
+<% if current_user.companies.present? %>
+	<% current_user.companies.each do |c| %>
+		<p><%= c.cname %></p>
+	<% end %>
+<% else %>
+	<%= link_to "Please, set up your company information.", new_company_path(client_id: current_user.id) %>
+<% end %>
+
+
+<div class="ui equal width grid">
+	<div class="column">
+		<h2 class="ui header">My Machines
+			<div class="sub header">Your LeadMachines</div>
+		</h2>
+		<p>You have <%= current_user.machines.count %> Machines associated with your account</p>
+		<%= link_to "Show", machines_path, class: 'ui positive button' %>
+	</div>
+	
+	<div class="column">
+		<h2 class="ui header">My Companies
+			<div class="sub header">Your Business Info</div>
+		</h2>
+		<p>You have <%= pluralize(current_user.companies.count, 'company') %> associated with your account</p>
+		<% if current_user.companies.present? %>
+		<% current_user.companies.each do |c| %>
+			<%= link_to c.cname, company_path(c.id), class: 'ui positive button' %>
+		<% end %>
+		<%= link_to "Create Another", new_company_path, class: 'ui red button' %>
+		<% else %>
+		<%= link_to "Create", new_company_path, class: 'ui red button' %>
+		<% end %>
+	</div>
+
+	<div class="column">
+		<h2 class="ui header">My Subscriptions
+			<div class="sub header">Your account</div>
+		</h2>
+		<div class="ui disabled button">Coming Soon</div>
+	</div>
+</div>
+

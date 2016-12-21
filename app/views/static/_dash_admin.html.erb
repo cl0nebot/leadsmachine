@@ -1,0 +1,123 @@
+<div class="ui secondary menu">
+  <a class="active item">Dashboard</a>
+  <a class="item" href="/machines">Machines</a>
+  <a class="item" href="/clients">Clients</a>
+  <a class="item" href="/companies">Companies</a>
+</div>
+
+<table class="ui table">
+	<thead>
+		<th class="collapsing">ID</th>
+		<th>Name</th>
+		<th>Client</th>
+		<th class="collapsing">Unaudited</th>
+		<th class="collapsing">Billable</th>
+		<th class="collapsing">Rate per Call</th>
+		<th class="collapsing">Client Income</th>
+	</thead>
+
+	<tbody>
+	<%= @machines.each do |m| %>
+	<% @billablecalls = Call.billable.where(tracking_number_id: m.tracking_numbers).count %>
+	<% @income = m.cpl * @billablecalls if (m.cpl.present? && @billablecalls.present?) %>
+		<tr>
+			<td><%= m.lmid %></td>
+			<td><%= m.properties.first.name if m.properties.first.present? %></td>
+			<td><%= m.user.email if m.user.present? %></td>
+			<td><%= Call.unaudited.where(tracking_number_id: m.tracking_numbers).count %></td>
+			<td><%= @billablecalls %></td>
+			<td><%= m.cpl %></td>
+			<td><%= @income %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+
+<div class="ui grid">
+	<div class="eleven wide column">
+
+		<h1 class="ui header">Staff Dashboard</h1>
+
+<div class="ui inverted segment">
+		<div class="ui violet inverted statistic">
+	  	<div class="value">
+	    	<%= @callstoday %>
+	  	</div>
+	  	<div class="label">
+		    Calls Today
+	  	</div>
+		</div>
+
+		<div class="ui purple inverted statistic">
+	  	<div class="value">
+	    	<%= @callsthismonth %>
+	  	</div>
+	  	<div class="label">
+		    Calls This Month
+	  	</div>
+		</div>
+
+		<div class="ui purple inverted statistic">
+	  	<div class="value">
+	    	<%= @callslastmonth %>
+	  	</div>
+	  	<div class="label">
+		    Calls Last Month
+	  	</div>
+		</div>
+
+		<div class="ui red inverted statistic">
+	  	<div class="value">
+	    	<%= @clientcount %>
+	  	</div>
+	  	<div class="label">
+		    Calls Last Month
+	  	</div>
+		</div>
+
+		<div class="ui green inverted statistic">
+	  	<div class="value">
+	    	<%= @clientcount %>
+	  	</div>
+	  	<div class="label">
+		    Clients
+	  	</div>
+		</div>
+
+<div class="row"></div>
+
+		<div class="ui inverted statistic">
+	  	<div class="value">
+	    	$<%= @retainertotal %>
+	  	</div>
+	  	<div class="label">
+		    Retainers
+	  	</div>
+		</div>
+</div>
+
+
+	</div>
+
+	<div class="five wide column">
+		<h1 class="ui heading">Clients Without Machines</h1>
+		<% if @prospects.present? %>
+		<table class="ui selectable table">
+			<thead>
+				<th class="collapsing">ID</th>
+				<th>Email</th>
+			</thead>
+			<tbody>
+				<% @prospects.each do |p| %>
+				<tr>
+					<td><%= p.id %></td>
+					<td><%= p.email %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% else %>
+		All good.
+		<% end %>
+	</div>
+</div>

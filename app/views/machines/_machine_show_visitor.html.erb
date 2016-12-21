@@ -1,0 +1,9 @@
+	<center>
+	<% if @machine.user.nil? %>
+		<%= render 'machine_available' %>
+	<% else %>
+		<div class="ui negative message">
+			SORRY, THIS MACHINE IS NO LONGER AVAILABLE.
+		</div>
+	<% end %>
+	</center>

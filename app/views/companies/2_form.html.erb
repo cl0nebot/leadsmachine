@@ -1,0 +1,118 @@
+<%= form_for(@company, html: {class: 'ui form'}) do |f| %>
+<% if @company.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+    <ul>
+    <% @company.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%# TODO: User_id is not getting changed when edited. Weird %>
+
+  <div class="two fields">
+    <div class="field">
+      <label>User:</label>
+      <%= f.collection_select :user_id, User.all, :id, :email, {include_blank: true}, {class: 'ui dropdown'} %>
+    </div>
+    <div class="field">
+      <label>Company Name</label>
+      <%= f.text_field :cname %>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>Street Address 1</label>
+      <%= f.text_field :street1 %>
+    </div>
+    <div class="field">
+      <label>Street Address 2</label>
+    <%= f.text_field :street2 %>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>City</label>
+    <%= f.text_field :city %>
+    </div>
+
+    <div class="field">
+      <label>Province</label>
+    <%= f.collection_select :user_id, Province.all, :id, :abr, {}, {class: 'ui dropdown'} %>
+    </div>
+  </div>
+  <div class="three fields">
+    <div class="field">
+      <label>Postal Code</label>
+    <%= f.text_field :postalcode %>
+    </div>
+    <div class="field">
+      <label>Business Phone</label>
+    <%= f.text_field :phone %>
+    </div>
+    <div class="field">
+      <label>Time Zone</label>
+      <%= f.text_field :timezone %>
+    </div>
+  </div>
+
+
+  <div class="four fields">
+    <div class="field">
+      <label>Google Plus</label>
+    <%= f.text_field :googleplus %>
+    </div>
+    <div class="field">
+      <label>Facebook</label>
+    <%= f.text_field :facebook %>
+    </div>
+    <div class="field">
+      <label>LinkedIn</label>
+      <%= f.text_field :linkedin %>
+    </div>
+    <div class="field">
+      <label>Twitter</label>
+      <%= f.text_field :twitter %>
+    </div>
+  </div>
+  
+  <div class="two fields">
+    <div class="field">
+      <label>Short Description</label>
+    <%= f.text_field :shortdescription %>
+    </div>
+    <div class="field">
+      <label>Tags</label>
+    <%= f.text_field :tags %>
+    </div>
+  </div>
+  <div class="field">
+    <label>Long Description</label>
+  <%= f.text_area :longdescription %>
+  </div>
+  <div class="four fields">
+    <div class="field">
+      <label>Citation Email</label>
+    <%= f.text_field :citationemail %>
+    </div>
+    <div class="field">
+      <label>Business Email</label>
+    <%= f.text_field :usinessemail %>
+    </div>
+    <div class="field">
+      <label>Citation Login</label>
+    <%= f.text_field :login %>
+    </div>
+    <div class="field">
+      <label>Citation Password</label>
+    <%= f.text_field :password %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'ui positive button' %>
+  </div>
+<% end %>

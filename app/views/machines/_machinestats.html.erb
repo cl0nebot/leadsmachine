@@ -1,0 +1,38 @@
+<div class="ui four statistics">
+  <div class="statistic">
+    <div class="value">
+      <i class="phone icon"></i> <%= @calltarget %>
+    </div>
+    <div class="label">
+      Leads per Month Target
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+       <%= @tdcv.present? ? @tdcv : "NEW" %>
+    </div>
+    <div class="label">
+      Actual 30 Day Call Volume
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+       <%= @ndcv.present? ? @ndcv : "NEW" %>
+    </div>
+    <div class="label">
+      Actual 90 Day Call Volume
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+    	<% if @age < 90 %>
+    	NEW
+    	<% else %>
+       $<%= @leadcost %>
+      <% end %>
+    </div>
+    <div class="label">
+      Effective Lead Cost
+    </div>
+  </div>
+</div>

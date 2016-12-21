@@ -1,0 +1,50 @@
+<% if current_user.client? %>
+<div class="ui message">invalid</div>
+<% else %>
+<div class="ui secondary menu">
+  <a class="item">Dashboard</a>
+  <a class="item" href="/machines">Machines</a>
+  <a class="item" href="/clients">Clients</a>
+  <a class="active item" href="/companies">Companies</a>
+</div>
+
+<h1 class="ui header">Companies
+  <% if params[:client_id] %>
+  <div class="sub header">Client: <%= params[:client_id] %> </div>
+  <% end %>
+</h1>
+
+<table class="ui selectable table">
+  <thead>
+    <tr>
+    <% unless params[:client_id] %>
+      <th>Client</th>
+    <% end %>
+      <th>Company</th>
+      <th>Street1</th>
+      <th>City</th>
+      <th>Province</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+      <% unless params[:client_id] %>
+        <td><%= company.user.email if company.user.present? %></td>
+      <% end %>
+        <td><%= link_to company.cname, company %></td>
+        <td><%= company.street1 %></td>
+        <td><%= company.city %></td>
+        <td><%= company.province.abr %></td>
+        <td><%= company.phone %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company', new_company_path %>
+<% end %>

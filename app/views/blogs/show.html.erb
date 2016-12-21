@@ -1,0 +1,19 @@
+<div class="sixteen wide column">
+
+<h1>
+	<%= @blog.name %>
+	
+</h1>
+<div class="sub header">Published on <%= @blog.created_at.strftime('%B %e %Y') %></div>
+<div class="ui divider"></div>
+
+<p>
+  <strong>Content:</strong>
+  <%= markdown(@blog.content) %>
+</p>
+
+<% if can? :manage, @blog %>
+<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<% end %>
+
+<%= link_to 'Back', blogs_path %>

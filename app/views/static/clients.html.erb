@@ -1,0 +1,44 @@
+<% if current_user.client? %>
+<div class="ui message">invalid</div>
+<% else %>
+<div class="ui secondary menu">
+  <a class="item">Dashboard</a>
+  <a class="item" href="/machines">Machines</a>
+  <a class="active item" href="/clients">Clients</a>
+  <a class="item" href="/companies">Companies</a>
+</div>
+	<% unless @clients.nil? %>
+
+	<h1 class="ui header">Clients</h1>
+	<table class="ui selectable table">
+		<thead>
+			<th>Client</th>
+			<th>Tracking Numbers</th>
+			<th>Companies</th>
+			<th>Machines</th>
+			<th class="collapsing">Calls<br>This Month</th>
+			<th class="collapsing">Calls<br>Last Month</th>
+			<th class="collapsing">Total<br>Calls</th>
+		</thead>
+		<tbody>
+		<% @clients.each do |client| %>
+			<tr>
+				<td><%= link_to client.email, companies_path(client_id: client.id) %> - (id: <%= client.id %>) </td>
+				<td>NUMBER</td>
+				<td><%= client.companies.present? ? (link_to client.companies.count, companies_path(client_id: client.id)) : (link_to "Create", new_company_path(client_id: client.id), class: 'ui small button') %></td>
+				</td>
+				<td><%= link_to client.machines.count, machines_path(client_id: client.id), class: 'ui purple basic button' %>
+				</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+			
+		<% end %>
+		</tbody>
+	</table>
+
+	<% else %>
+	<div class="ui message">No Clients in the System. Sell something!</div>
+	<% end %>
+<% end %>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><%= @title ||= "Leads Machine Makes your Phone Ring!" %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, async: Rails.env.production? %>
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <meta name="description" content= <%= @descr ||= "Supercharge your sales funnel with Leads Machine - we Make Your Phone Ring."%> >
+  <meta name=keywords content="sales leads canada">
+  <%= csrf_meta_tags %>
+   <script type="text/javascript">
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-71858141-1']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+</head>
+<body>
+	
+	<div class="ui inverted red menu">
+
+		<div class="logo item">
+			<a href="/"><i class="home icon" alt="home"></i></a>
+		</div>
+
+	  <div class="item">
+	  	<%= link_to "leadsmachine blog", blogs_path %>
+	  </div>
+	  
+	  <div class="right item" data-no-turbolink>
+	  <% if current_user %>
+	  	<%= current_user.email %> &nbsp;
+	  	<%= link_to "log out", destroy_user_session_path, :method => :delete, class: 'ui inverted button' %>
+	  <% else %>
+	  	<%= link_to "client login", new_user_session_path, class: 'ui inverted button' %>
+	  <% end %>
+	  </div>
+	
+	</div>
+
+<script>_gaq.push(['_trackPageview']);</script>
+<% if (alert || notice) %>
+	<div class="ui page grid">
+		<% if alert %>
+	  <div class="ten wide centered column">
+	    <div class="ui negative compact icon message">
+	      <i class="close icon"></i>
+	      <i class="bomb icon"></i>
+	      <div class="header">
+	        <%= alert %>
+	      </div>
+	      
+	    </div>
+	  </div>
+		<% end %>
+		<% if notice %>
+	  <div class="ten wide centered column">
+	    <div class="ui positive icon message">
+	      <i class="close icon"></i>
+	      <i class="thumbs up icon"></i>
+	      <div class="header">
+	        <%= notice %>
+	      </div>
+	      
+	    </div>
+	  </div>
+		<% end %>
+	</div>
+<% end %>
+	
+	<%= yield %>
+
+</body>
+</html>

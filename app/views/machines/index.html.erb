@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+  <%= render 'machine_index_admin' %>
+  <% else %>
+  <%= render 'machine_index_client' %>
+  <% end %>
+<% else  #user not signed in %>
+  <%= render 'machine_index_visitor' %>
+<% end %>

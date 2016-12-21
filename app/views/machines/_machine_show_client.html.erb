@@ -1,0 +1,69 @@
+<%if @machine.properties.present? %>
+	<div class="ui header">
+		Properties
+	</div>
+	<table class="ui table"%>
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>URL</th>
+			<th>Phone</th>
+			<th>Email</th>
+		</tr>
+		</thead>
+		<tbody>
+	<% @machine.properties.each do |p| %>
+		<tr>
+			<td><%= link_to p.id, property_path(p.id) %></td>
+			<td><%= p.name %></td>
+			<td><%= p.url %></td>
+			<td><%= p.phone %></td>
+			<td><%= p.businessemail %></td>
+		</tr>
+	<% end %>
+	</tbody>
+	</table>
+<% end %>
+
+<% if @machine.tracking_numbers.present? %>
+	<h2 class="ui header">Tracking Numbers</h2>
+
+<%= @calls %>
+
+	<% @machine.tracking_numbers.each do |tn| %>
+		<p><%= tn.phone %></p>
+	<% end %>
+<% else %>
+<div class="ui warning message">
+Warning: You have no tracking numbers assigned to this machine. If this condition persists, please contact support.
+</div>
+<% end %>
+
+
+<div class="ui positive message">
+	<div class="header">Calls: <%= @machine.specialty.name %> in <%= @machine.city.name %></div>
+	<%= line_chart [
+	  ["2015-01-01", "4"],
+	  ["2015-01-02", "7"],
+	  ["2015-01-03", "12"],
+	  ["2015-01-04", "4"],
+	  ["2015-01-05", "4"],
+	  ["2015-01-06", "7"],
+	  ["2015-01-07", "4"],
+	  ["2015-01-08", "4"],
+	  ["2015-01-09", "14"],
+	  ["2015-01-10", "4"],
+	  ["2015-01-11", "4"],
+	  ["2015-01-12", "7"],
+	  ["2015-01-13", "12"],
+	  ["2015-01-14", "4"],
+	  ["2015-01-15", "4"],
+	  ["2015-01-16", "7"],
+	  ["2015-01-17", "4"],
+	  ["2015-01-18", "4"],
+	  ["2015-01-19", "14"]
+
+	], discreet: true, ytitle: "Calls" %>
+</div>
+

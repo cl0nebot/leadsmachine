@@ -1,0 +1,43 @@
+<h1 class="ui header">Available LeadMachines</h1>
+<% unless @machines.present? %>
+  <center>
+  <div class="ui  positive message">
+    <h3>Sorry, no pre-built LeadMachines are available now. Let us build one from scratch, customized JUST FOR YOUR BUSINESS</h3>
+    <a href="/free-marketing-consultation" class="ui animated fade massive red button" tabindex="0">
+      <div class="visible content">LETS GET TO WORK</div>
+      <div class="hidden content">
+      MAKE MY PHONE RING</i>
+      </div>
+    </a>
+  </div>
+  </center>
+<% else %>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>ID</th> 
+      <th>Category</th>
+      <th>SubCategory</th>
+      <th>Specialty</th>
+      <th>City</th>
+      <th>Province</th>
+      <th>Created</th> 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @machines.each do |machine| %>
+      <tr>
+        <td><%= link_to machine.lmid, machine %></td>
+        <td><%= machine.category.name %></td>
+        <td><%= machine.subcategory.name if machine.subcategory.present? %></td>
+        <td><%= machine.specialty.name if machine.specialty.present? %></td>
+        <td><%= machine.city.name %></td>
+        <td><%= machine.province.abr %></td>
+        <td><%= machine.created_at.strftime("%Y/%m/%d") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>

@@ -1,0 +1,12 @@
+<h1 class="ui header">Editing Machine</h1>
+
+<p><%= @machine.city.name %> / <%= @machine.province.abr %></p>
+<p><%= @machine.specialty.name %> / <%= @machine.subcategory.name %> / <%= @machine.category.name %></p>
+<% @subs.each do |sub| %>
+<p><%= sub.specialty.name %> / <%= sub.subcategory.name %> / <%= sub.category.name %></p>
+<% end %>
+<%= render 'edit_form' %>
+
+
+<%= link_to 'Show', @machine %> |
+<%= link_to 'Back', machines_path %>

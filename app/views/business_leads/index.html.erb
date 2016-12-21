@@ -1,0 +1,9 @@
+<div class="sixteen wide column">
+	<h1>Business Leads</h1>
+	<p>We serve all of Canada. Please search by Province.</p>
+	<ol class='ui relaxed list'>
+	<% @provinces.each do |p| %>
+		<li><%= link_to p.name, business_lead_path(p.abr) %></li>
+	<% end %>
+	</ul>
+</div>

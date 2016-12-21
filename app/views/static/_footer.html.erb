@@ -1,0 +1,22 @@
+<div class="ui inverted red vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">     
+      <div class="seven wide column">
+        <h3 class="ui inverted header">Questions? <%= link_to "Get in Touch!", contact_us_path, class: 'ui inverted button' %> or Call (905) 525-8888</h3>
+        
+        <p>LeadsMachine is a service of Miracula Ltd.<br>
+        &copy; 2015-2016. All Rights Reserved</p>
+        <p><%= link_to "Privacy", privacy_policy_path %> | <%= link_to "Terms of Service", tos_path %> | <%= link_to "Refunds", refunds_path %></p>
+      </div>
+    <% @provinces.in_groups_of(4, false) do |row_provs| %>
+      <div class="two wide column">
+      <% for provs in row_provs %>
+        <div class="ui inverted link list">
+          <div class="item"><%= link_to (provs.abr + " Business Leads"), business_lead_path(provs.abr) %></div>
+        </div>
+      <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

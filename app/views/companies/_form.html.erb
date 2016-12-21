@@ -1,0 +1,62 @@
+<%= simple_form_for(@company, html: {class: 'ui form'}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="two fields">
+      <div class="field"><%= f.input :cname, label: "Company Name" %></div>
+      <div class="field"><%= f.association :user, label: false, label_method: :email, input_html: { class: 'ui dropdown'} %></div>
+    </div>
+    <div class="two fields">
+      <div class="field"><%= f.input :businessemail, label: "Business Main Email" %>
+      </div>
+      <div class="field"><%= f.input :phone %>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field"><%= f.input :street1, label: "Street Address 1" %>
+      </div>
+      <div class="field"><%= f.input :street2, label: "Street Address 2" %>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field"><%= f.input :city %>
+      </div>
+      <div class="field"><%= f.association :province, label:false, input_html: { class: 'ui dropdown'} %>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field"><%= f.input :postalcode, label: "Postal Code" %>
+      </div>
+      <div class="field"><%= f.input :timezone, label: "Time Zone" %>
+      </div>
+    </div>
+    <div class="four fields">
+      <div class="field"><%= f.input :googleplus, label: "G+ URL" %>
+      </div>
+      <div class="field"><%= f.input :facebook, label: "Facebook URL" %>
+      </div>
+      <div class="field"><%= f.input :linkedin, label: "LinkedIn URL" %>
+      </div>
+      <div class="field"><%= f.input :twitter, label: "Twitter URL" %>
+      </div>
+    </div>
+    <div class="field"><%= f.input :shortdescription, label: "Short Description" %>
+    </div>
+    <div class="field"><%= f.input :longdescription, as: :text, label: "Long Description" %>
+    </div>
+    <div class="four fields">
+      <div class="field"><%= f.input :tags, placeholder: "(Comma Separated)" %>
+      </div>
+      <div class="field"><%= f.input :citationemail, label: "Citation Email" %>
+      </div>
+      <div class="field"><%= f.input :login, label: "Citation Login" %>
+      </div>
+      <div class="field"><%= f.input :password, label: "Citation Password" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'ui positive button' %>
+  </div>
+<% end %>

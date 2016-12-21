@@ -1,0 +1,138 @@
+<% if @machine.parent.present? %>
+<div class="ui compact warning message">
+This is a slave machine. <%= link_to "Click for Master", machine_path(@machine.parent) %>
+</div>
+<% end %>
+<table class="ui selectable celled table">
+	<thead>
+		<tr>
+	  	<th>Machine ID</th>
+      <th>Client</th>
+      <th>City</th>
+      
+      <th>Specialty</th>
+      <th>Retainer</th>
+      <th>Retainer CPL</th>
+      <th>Standard Rate</th>
+      <th class="collapsing">Suggested</th>
+      <th>Lead Guarantee</th>
+      <th>Guarantee Date</th>
+		</tr>
+	</thead>
+	<tbody>
+	  <tr>
+	    <td><%= @machine.lmid %></td>
+	    <td><%= @machine.user.email if @machine.user_id %></td>
+	    <td><%= @machine.city.name %></td>
+	    <td><%= @machine.specialty.name if @machine.specialty.present? %></td>
+	    <td>$<%= '%.2f' % (@machine.retainer.to_f / 100) %></td>
+	    <td>$<%= '%.2f' % (@machine.retainercpl.to_f / 100) %></td>	    
+	    <td>$<%= '%.2f' % (@machine.cpl.to_f / 100) %></td>
+			<td>$<%= @machine.specialty.leadvalue %></td>
+			<td><%= @machine.leadguarantee %></td>
+	    <td><%= "n/a" ||+ @machine.guaranteedate.strftime('%b %d, %Y')  %></td>
+    </tr>		
+	</tbody>
+
+</table>
+<% if @machine.parent.nil? %>
+	<div class="ui divider"></div>
+	<h2>Tracking Numbers</h2>
+	<% if @machine.tracking_numbers.present? %>
+		<table class="ui selectable celled table">
+			<% @machine.tracking_numbers.each do |m| %>
+			<tr>
+				<td><%= m.id %></td>
+				<td><%= m.phone %></td>
+				<td><%= m.status %></td>
+				<td><%= m.provider %></td>
+			</tr>
+			<% end %>
+		</table>
+	<% end %>
+	
+	<p><%= link_to "Add", new_admin_tracking_number_path(machine_id: @machine.lmid) %></p>
+	<p>Available Tracking Numbers:</p>
+	<ul>
+	<% @atn.each do |t| %>
+	<li><%= t.phone %></li>
+	<% end %>
+	</ul>
+
+	<% if @children.present? %>
+		<table class="ui table">
+		  <thead>
+		    <tr>  
+			  	<th>Children</th>
+			    <th>City</th>
+			    <th>Category</th>
+			    <th>SubCategory</th>
+	      	<th>Specialty</th>
+			    <th>Lead Value</th>
+			  </tr>
+		  </thead>
+		  <tbody>
+	    	<% @children.each do |p| %>
+	      <tr>
+	        <td><%= p.lmid %></td>
+	        <td><%= p.city.name %></td>
+	        <td><%= p.category.name %></td>
+	        <td><%= p.subcategory.name if p.subcategory.present? %></td>
+	        <td><%= p.specialty.name if p.specialty.present? %></td>
+	        <td>$<%= p.specialty.leadvalue %></td>
+	      </tr>
+				<% end %>  
+		  </tbody>
+		</table>
+	<% end %>
+
+	<% if @potentials.present? %>
+		<h3>Other Machines in the same city:</h3>
+		<table class="ui table">
+		  <thead>
+		    <tr>
+		      <th>User</th>
+		      <th>ID</th>
+		      <th>Province</th>
+		      <th>City</th>
+		      <th>Category</th>
+		      <th>SubCategory</th>
+		      <th>Specialty</th>
+		      <th>Lead Value</th>
+		      <th>Rate</th>
+		      <th colspan="2"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		   <tbody>
+	    <% @potentials.each do |p| %>
+	      <tr>
+	        <td><%= "none" ||+ p.user.email %></td>
+	        <td><%= link_to p.lmid, p %></td>
+	        <td><%= p.province.abr %></td>
+	        <td><%= p.city.name %></td>
+	        <td><%= p.category.name %></td>
+	        <td><%= p.subcategory.name if p.subcategory.present? %></td>
+	        <td><%= p.specialty.name if p.specialty.present? %></td>
+	        <td>$<%= p.specialty.leadvalue %></td>
+	        <td>$<%= (p.cpl.to_f / 100).to_i %></td>
+	        <td><%= link_to "Link This", root_path, class: 'ui purple button' %></td>
+	      </tr>
+			<% end %>  
+		  </tbody>
+
+		</table>
+	<% end %>
+	<div class="ui divider"></div>
+
+	City Size: <%= @citysize %><br>
+
+
+	<% if can? :manage, @machine %>
+		<%= link_to 'Edit', edit_machine_path(@machine) %> |
+		<%= link_to 'Back', machines_path %>
+		</div>
+	<% end %>		
+
+
+<% end %>

@@ -1,0 +1,95 @@
+<h1 class="ui header">My LeadMachines</h1>
+
+<% if @machines.present? %>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Province</th>
+      <th>City</th>
+      <th>Category</th>
+      <th>SubCategory</th>
+      <th>Specialty</th>
+      <th>Rate</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @machines.each do |machine| %>
+      <tr>
+        <td><%= link_to machine.lmid, machine %></td>
+        <td><%= machine.province.abr %></td>
+        <td><%= machine.city.name %></td>
+        <td><%= machine.category.name %></td>
+        <td><%= machine.subcategory.name if machine.subcategory.present? %></td>
+        <td><%= machine.specialty.name if machine.specialty.present? %></td>
+        <td>$<%= (machine.cpl.to_f / 100).to_i %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="ui positive message">
+<div class="header">Calls: All Machines</div>
+<%= line_chart [
+  ["2015-01-01", "4"],
+  ["2015-01-02", "7"],
+  ["2015-01-03", "12"],
+  ["2015-01-04", "4"],
+  ["2015-01-05", "4"],
+  ["2015-01-06", "7"],
+  ["2015-01-07", "4"],
+  ["2015-01-08", "4"],
+  ["2015-01-09", "14"],
+  ["2015-01-10", "4"],
+  ["2015-01-11", "4"],
+  ["2015-01-12", "7"],
+  ["2015-01-13", "12"],
+  ["2015-01-14", "4"],
+  ["2015-01-15", "4"],
+  ["2015-01-16", "7"],
+  ["2015-01-17", "4"],
+  ["2015-01-18", "4"],
+  ["2015-01-19", "14"]
+
+], discreet: true, ytitle: "Calls" %>
+</div>
+
+<table class="ui selectable table">
+  <thead>
+    <tr>
+      <th>Machine</th>
+      <th>TrackingNumber</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Caller</th>      
+      <th>Location</th>
+      <th>Status</th>
+      <th>Seconds</th>
+      <th>Tag</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% 5.times do %>
+    <tr>
+      <td><%= @machines.first.lmid %></td>
+      <td><%= @machines.first.tracking_numbers.first.phone if @machines.first.tracking_numbers.present? %></td>
+      <td><%= Date.today %></td>
+      <td><%= Time.now.strftime('%H:%M %p') %></td>
+      <td>416-999-9999</td>
+      
+      <td>Toronto, ON</td>
+      <td>Received</td>
+      <td>92</td>
+      <td>Tag</td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+No LeadMachine has been assigned to your account. If this is not what you expected, please 
+<a href="mailto:clientsupport@leadsmachine.ca">send us a message</a>
+<% end %>

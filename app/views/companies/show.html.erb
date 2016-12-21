@@ -1,0 +1,104 @@
+<div class="ui header">Yes, this is ugly. It will get better.</div>
+
+<p>
+  <strong>User:</strong>
+  <%= @company.user.email if @company.user.present? %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @company.cname %>
+</p>
+
+<p>
+  <strong>Street1:</strong>
+  <%= @company.street1 %>
+</p>
+
+<p>
+  <strong>Street2:</strong>
+  <%= @company.street2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @company.city %>
+</p>
+
+<p>
+  <strong>Province:</strong>
+  <%= @company.province.abr %>
+</p>
+
+<p>
+  <strong>Postalcode:</strong>
+  <%= @company.postalcode %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @company.phone %>
+</p>
+
+<p>
+  <strong>Googleplus:</strong>
+  <%= @company.googleplus %>
+</p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @company.facebook %>
+</p>
+
+<p>
+  <strong>Linkedin:</strong>
+  <%= @company.linkedin %>
+</p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @company.twitter %>
+</p>
+
+<p>
+  <strong>Shortdescription:</strong>
+  <%= @company.shortdescription %>
+</p>
+
+<p>
+  <strong>Longdescription:</strong>
+  <%= @company.longdescription %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= @company.tags %>
+</p>
+
+<p>
+  <strong>Citationemail:</strong>
+  <%= @company.citationemail %>
+</p>
+
+<p>
+  <strong>Businessemail:</strong>
+  <%= @company.businessemail %>
+</p>
+
+<p>
+  <strong>Login:</strong>
+  <%= @company.login %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @company.password %>
+</p>
+
+<p>
+  <strong>Timezone:</strong>
+  <%= @company.timezone %>
+</p>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

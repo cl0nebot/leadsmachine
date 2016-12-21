@@ -1,0 +1,143 @@
+	<h1 class ="ui dividing header">
+		<%= @property.name %>
+		<div class="sub header">
+			Property: <%= @property.url %>
+			<% if (current_user.admin? && @property.prop_type == "User") %>
+			- <%= link_to "Back to Client List", clients_path %>
+			<% end %>
+		</div>
+	</h1>
+	<div class="ui stackable grid">
+  
+  <div class="eight wide column">
+  	
+		<div class="ui header">Address</div>
+
+		<p>
+		  <strong>Street1:</strong>
+		  <%= @property.street1 %>
+		</p>
+
+		<p>
+		  <strong>Street2:</strong>
+		  <%= @property.street2 %>
+		</p>
+
+		<p>
+		  <strong>City:</strong>
+		  <%= @property.city %>
+		</p>
+
+		<p>
+		  <strong>Prov:</strong>
+		  <%= @property.province %>
+		</p>
+
+		<p>
+		  <strong>PC:</strong>
+		  <%= @property.postalcode %>
+		</p>
+
+		<p>
+		  <strong>Phone:</strong>
+		  <%= @property.phone %>
+		</p>
+	</div>
+	
+	<div class="eight wide column">
+		<div class="ui header">Social</div>
+  	<p>
+		  <strong>G+:</strong>
+		  <%= @property.googleplus %>
+		</p>
+
+		<p>
+		  <strong>Facebook:</strong>
+		  <%= @property.facebook %>
+		</p>
+
+		<p>
+		  <strong>LinkedIn:</strong>
+		  <%= @property.linkedin %>
+		</p>
+
+		<p>
+		  <strong>Twitter:</strong>
+		  <%= @property.twitter %>
+		</p>
+	</div>
+
+	<div class="eight wide column">
+		<div class="ui header">Citation Data</div>
+
+		<p>
+		  <strong>Short Description:</strong>
+		  <%= @property.shortdescription %>
+		</p>
+
+		<p>
+		  <strong>Long Description:</strong>
+		  <%= @property.longdescription %>
+		</p>
+
+		<p>
+		  <strong>Tags:</strong>
+		  <%= @property.tags %>
+		</p>
+
+		<p>
+		  <strong>URL:</strong>
+		  <%= @property.url %>
+		</p>
+
+		<p>
+		  <strong>Citation Email:</strong>
+		  <%= @property.citationemail %>
+		</p>
+
+		<p>
+		  <strong>Business Email:</strong>
+		  <%= @property.businessemail %>
+		</p>
+
+		<p>
+		  <strong>Login:</strong>
+		  <%= @property.login %>
+		</p>
+
+		<p>
+		  <strong>Password:</strong>
+		  <%= @property.password %>
+		</p>
+
+		<p>
+		  <strong>Time Zone:</strong>
+		  <%= @property.timezone %>
+		</p>
+  </div>
+
+  <div class="eight wide column">
+  	<div class="ui header">Citations
+  		<div class="sub header"><%= @property.citations.count %> Citations found</div>
+  	</div>
+  	<% if @property.citations.present? %>
+  		<table class="ui very basic table">
+  		<% @property.citations.each do |c| %>
+  			<tr>
+  				<td><%= link_to c.citation_source.site, c.url, class: 'ui red label', target: "_blank" %></td>
+  				<td><%= c.url %></td>
+  				<td><div class="ui blue button"><%= c.pa %></div></td>
+  				<td><div class="ui purple button"><%= c.citation_source.da %></div></td>
+  			</tr>
+  		<% end %>
+  		</table>
+  	<% end %>
+  	<%= link_to "Add Citation", new_citation_path(property: @property.id), class: 'ui positive button'%>
+  </div>
+
+	<div class="ui divider"></div>
+	<div class="row">
+	
+	<strong> Last Updated: </strong><%= @property.updated_at %>
+	
+  </div>

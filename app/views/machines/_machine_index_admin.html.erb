@@ -1,0 +1,165 @@
+<div class="ui secondary menu">
+  <a class="item" href="/dashboard">Dashboard</a>
+  <a class="active item">Machines</a>
+  <a class="item" href="/clients">Clients</a>
+  <a class="item" href="/companies">Companies</a>
+</div>
+
+<% if params[:client_id] %> 
+  <h1 class="ui header">Client Machines
+    <div class="sub header"><%= @client.email %></div>
+  </h1>
+  <p><%= link_to "New", new_machine_path(client_id: @client.id), class: 'ui small button' %>
+   <table class="ui table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>ID</th>
+        <th>Province</th>
+        <th>City</th>
+        <th>Category</th>
+        <th>SubCategory</th>
+        <th>Specialty</th>
+        <th>Retainer</th>
+        <th>Retainer CPL</th>
+        <th>Retainer Guarantee</th>
+        <th>Guarantee Date</th>
+        <th>Standard CPL</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @machines.each do |machine| %>
+        <tr>
+          <td><%= machine.user.email %></td>
+          <td><%= link_to machine.lmid, machine %></td>
+          <td><%= machine.province.abr %></td>
+          <td><%= machine.city.name %></td>
+          <td><%= machine.category.name %></td>
+          <td><%= machine.subcategory.name if machine.subcategory.present? %></td>
+          <td><%= machine.specialty.name if machine.specialty.present? %></td>
+          <td>$<%= (machine.retainer.to_f / 100).to_i %></td>
+          <td>$<%= (machine.retainercpl.to_f / 100).to_i %></td>
+          <td><%= machine.leadguarantee %></td>
+          <td><%= machine.guaranteedate %></td>
+          <td>$<%= (machine.cpl.to_f / 100).to_i %></td>
+          <td><%= link_to "Create Sub", new_machine_path(
+            u: "" ||+ machine.user.id,
+            c: machine.category.id, 
+            s: machine.subcategory.id,
+            sp: machine.specialty.id,
+            ci: machine.city.id,
+            p: machine.province.id, 
+            parent: machine.lmid
+            ),  
+            class: "ui positive button" %></td> 
+        </tr>
+      <% end %>  
+    </tbody>
+  </table>
+<% else %>
+
+<h1>Machine Staff Index</h1>
+<div class="ui secondary menu">
+  <a class="active item" data-tab="first">Available for Sale</a>
+  <a class="item" data-tab="second">All Machines</a>
+</div>
+<div class="ui tab segment" data-tab="first">
+  <h2>Available for Sale</h2>
+  <% if @availables.present? %>
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Province</th>
+        <th>City</th>
+        <th>Category</th>
+        <th>SubCategory</th>
+        <th>Specialty</th>
+        <th>Retainer</th>
+        <th>Retainer CPL</th>
+        <th>Retainer Guarantee</th>
+        <th>Guarantee Date</th>
+        <th>Standard CPL</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @availables.each do |machine| %>
+        <tr>
+          <td><%= link_to machine.lmid, machine %></td>
+          <td><%= machine.province.abr %></td>
+          <td><%= machine.city.name %></td>
+          <td><%= machine.category.name %></td>
+          <td><%= machine.subcategory.name if machine.subcategory.present? %></td>
+          <td><%= machine.specialty.name if machine.specialty.present? %></td>
+          <td>$<%= (machine.retainer.to_f / 100).to_i %></td>
+          <td>$<%= (machine.retainercpl.to_f / 100).to_i %></td>
+          <td><%= machine.leadguarantee %></td>
+          <td><%= machine.guaranteedate %></td>
+          <td>$<%= (machine.cpl.to_f / 100).to_i %></td>
+          <td><%= link_to "Assign", edit_machine_path(machine.id), class: 'ui button' %></td>
+        </tr>
+      <% end %>  
+    </tbody>
+  </table>
+    
+  <% else %>
+    
+  Nothing available now<br>
+    
+  <% end %>
+    
+  <% if can? :create, @machine %>
+    <%= link_to 'New Machine', new_machine_path %>
+  <% end %>
+</div>
+
+<div class="ui tab segment" data-tab="second">
+  <h2>Sold</h2>
+<% if @soldmachines.present? %>
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>ID</th>
+        <th>Province</th>
+        <th>City</th>
+        <th>Category</th>
+        <th>SubCategory</th>
+        <th>Specialty</th>
+        <th>SRP</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @soldmachines.each do |machine| %>
+        <tr>
+          <td><%= machine.user.email %></td>
+          <td><%= link_to machine.lmid, machine %></td>
+          <td><%= machine.province.abr %></td>
+          <td><%= machine.city.name %></td>
+          <td><%= machine.category.name %></td>
+          <td><%= machine.subcategory.name if machine.subcategory.present? %></td>
+          <td><%= machine.specialty.name if machine.specialty.present? %></td>
+          <td>$<%= (machine.cpl.to_f / 100).to_i %></td>
+          <td><%= link_to "Create Sub", new_machine_path(
+            u: "" ||+ machine.user.id,
+            c: machine.category.id, 
+            s: machine.subcategory.id,
+            sp: machine.specialty.id,
+            ci: machine.city.id,
+            p: machine.province.id, 
+            parent: machine.lmid
+            ),  
+            class: "ui positive button" %></td> 
+        </tr>
+      <% end %>  
+    </tbody>
+  </table>
+<% end %>
+</div>
+<% end %>

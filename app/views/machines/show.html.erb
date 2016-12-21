@@ -1,0 +1,29 @@
+<% if user_signed_in? %>
+  <% if current_user.staff? || current_user.admin? %>
+	<div class="ui secondary menu">
+	  <a class="item" href="/dashboard">Dashboard</a>
+	  <a class="active item">Machines</a>
+	  <a class="item" href="/clients">Clients</a>
+	</div>
+	<h1 class="ui dividing header">
+  <%= @title %>
+  <div class="sub header">Machine ID: <%= @machine.lmid %></div>
+</h1>
+	  <%= render 'machine_show_admin' %>
+  <% else %>
+	<h1 class="ui dividing header">
+	  <%= @title %>
+	  <div class="sub header">Machine ID: <%= @machine.lmid %>
+	  </div>
+	</h1>
+  	<%= render 'machine_show_client' %>
+
+  <% end %>
+<% else  #user not signed in %>
+	<h1 class="ui dividing header">
+	  <%= @title %>
+	  <div class="sub header">Machine ID: <%= @machine.lmid %>
+	  </div>
+	</h1>
+  <%= render 'machine_show_visitor' %>
+<% end %>

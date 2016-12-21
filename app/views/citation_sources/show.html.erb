@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @citation_source.site %>
+</p>
+
+<p>
+  <strong>Submissionurl:</strong>
+  <%= @citation_source.submissionurl %>
+</p>
+
+<p>
+  <strong>Da:</strong>
+  <%= @citation_source.da %>
+</p>
+
+<p>
+  <strong>Freesubmit:</strong>
+  <%= @citation_source.freesubmit %>
+</p>
+
+<%= link_to 'Edit', edit_citation_source_path(@citation_source) %> |
+<%= link_to 'Back', citation_sources_path %>

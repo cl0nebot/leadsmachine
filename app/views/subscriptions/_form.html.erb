@@ -1,0 +1,39 @@
+<% if @hascard == false %>
+<p><em>We don't have a credit card on file for you. Please enter your card below. Everything is all nice and safe, PCI-DSS compliant, etc.</em></p>
+<%= image_tag 'payment-stripe.png' %>
+<% end %>
+
+<%= form_for(@machine, html: {id: "payment-form", class: 'ui form'}) do |f| %>  
+  <div class="actions">
+  	<%= f.hidden_field :machine, :value => @machine.id%>
+  	<%= f.hidden_field :user_id, :value => current_user.id%>
+  	<% if @hascard == false %>
+	  <div class="two fields">
+	  	<div class="field">
+	    	<label>
+	      	<span>Card Number</span>
+	      	<input type="text" size="20" data-stripe="number"/>
+	    	</label>
+	  	</div>
+
+	  	<div class="field">
+	  		<div class="two fields">
+	  			<span>Expiration</span>
+		  		<div class="field">
+			    	<label>
+			      	
+							<%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", data: {stripe: "exp-month"}, class: "ui dropdown"} %>
+				    </label>
+				  </div>
+				  <div class="field">
+				    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", data: {stripe: "exp-year"}, class: "ui dropdown"} %>
+			    </div>
+		    </div>
+		  </div>
+	  </div>
+	  <% end %>
+	  <div class="row">
+    	<%= f.submit "Purchase", class: 'ui massive positive button' %>
+  	</div>
+  </div>
+<% end %>

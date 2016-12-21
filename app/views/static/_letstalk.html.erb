@@ -1,0 +1,31 @@
+<%= simple_form_for @contact, :html => {:class => 'ui form' } do |f| %>
+  <div class="field">
+    <%= f.input :name, label: false, placeholder: "Your Name"%>
+  </div>
+
+  <div class="field">
+    <%= f.input :company, label: false, required: true, placeholder: "Your Company"%>
+  </div>
+  
+	<div class="field">
+    <%= f.input :biztype, label: false, required: true, placeholder: "What do you Sell?"%>
+  </div>
+  	  
+  <div class="field">
+  	<%= f.input :email, label: false, required: true, placeholder: "Your e-mail address" %>
+  </div>
+  <div class="field">
+  	<%= f.input :phone, label: false, required: true, placeholder: "Your day-time Phone number" %>
+  </div>
+
+  <div class="field">
+  	<%= f.input :market, label: false, placeholder: "Your Primary Market area" %>
+  </div>
+
+  <div class= "ui hidden message">
+    <%= f.input :nickname, hint: 'Leave this field blank!' %>
+  </div>
+	<%= f.button :submit, 'Send message', :class=> "ui fluid positive button" %>
+  
+<% end %>
+<i>Your information will not be shared. We hate spam as much as you!</i>

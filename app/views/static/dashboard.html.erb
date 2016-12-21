@@ -1,0 +1,5 @@
+<% if current_user.client? %>
+	<%= render 'dash_client' %>
+<% else %>
+  <%= render 'dash_admin' %>
+<% end %>
